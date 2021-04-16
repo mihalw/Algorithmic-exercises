@@ -1,6 +1,4 @@
 #include <iostream>
-#include <stdio.h>
-#include <vector>
 
 using namespace std;
 
@@ -13,10 +11,10 @@ int main() {
     short* tlen_w_itej_butli = new short[liczba_butli]; // dlugosc 5
     short* azot_w_itej_butli = new short[liczba_butli];
     short* waga_itej_butli = new short[liczba_butli];
-    short** wynik = new short* [potrzebny_tlen + 1];
+    short** wynik = new short* [potrzebny_tlen];
 
-    for (int i = 0; i < potrzebny_tlen + 1; i++)
-		wynik[i] = new short[potrzebny_azot + 1];
+    for (int i = 0; i < potrzebny_tlen; i++)
+		wynik[i] = new short[potrzebny_azot];
 
     for (int i = 0; i < liczba_butli; i++) 
         cin >> tlen_w_itej_butli[i] >> azot_w_itej_butli[i] >> waga_itej_butli[i];
@@ -27,17 +25,17 @@ int main() {
         if (azot_w_itej_butli[i] > potrzebny_azot)
             azot_w_itej_butli[i] = potrzebny_azot;
 
-        for (int k = 1; k < tlen_w_itej_butli[i] + 1; k++)
-            for (int l = 1; l < azot_w_itej_butli[i] + 1; l++) {
-                if (waga_itej_butli[i] < (wynik[k][l] || wynik[k][l] == 0)
+        for (int k = 0; k < tlen_w_itej_butli[i]; k++)
+            for (int l = 0; l < azot_w_itej_butli[i]; l++) {
+                if (waga_itej_butli[i] < wynik[k][l] || wynik[k][l] == 0) 
                     wynik[k][l] = waga_itej_butli[i];
                 // if (wynik[tlen_w_itej_butli[i] + 1 + k][azot_w_itej_butli[i] + 1 + l] > waga_itej_butli[i] || wynik[k][l] == 0)
                 //     wynik[k][l] = waga_itej_butli[i];
             }
     }
 
-    for (int i = 0; i < potrzebny_tlen + 1; i++) {
-        for (int j = 0; j < potrzebny_azot + 1; j++) {
+    for (int i = 0; i < potrzebny_tlen; i++) {
+        for (int j = 0; j < potrzebny_azot; j++) {
             cout << wynik[i][j] << " ";
         }
         cout << endl;
